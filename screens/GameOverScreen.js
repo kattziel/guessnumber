@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet, Text, Dimensions } from "react-native";
 
 import PrimaryButton from "../components/PrimaryButton";
 import Title from "../components/Title";
@@ -9,10 +9,10 @@ function GameOverScreen({ roundsNumber, userNumber, onGameOver }) {
     <View style={styles.rootContainer}>
       <Title>Game over!</Title>
       <View style={styles.imageContainer}>
-        {/* <Image
+        <Image
           style={styles.image}
           source={require('../assets/images/success.png')}
-        /> */}
+        />
       </View>
       <Text style={styles.externalText}>
         Your phone needed{" "}
@@ -26,6 +26,8 @@ function GameOverScreen({ roundsNumber, userNumber, onGameOver }) {
 
 export default GameOverScreen;
 
+const deviceWidth = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
@@ -34,13 +36,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageContainer: {
-    width: 300,
-    heigh: 300,
-    borderRadius: 150,
+    width: deviceWidth < 380 ? 150 : 300,
+    heigh: deviceWidth < 380 ? 150 : 300,
+    borderRadius: deviceWidth < 380 ? 75 : 150,
     borderWidth: 3,
     borderColor: Colors.primary800,
     overflow: 'hidden',
     margin: 36,
+    flex: 1
   },
   image: {
     width: '100%',
